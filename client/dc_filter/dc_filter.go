@@ -7,10 +7,10 @@ import (
 	"time"
 
 	"go-micro.dev/v4/client"
-	"go-micro.dev/v4/selector"
 	"go-micro.dev/v4/cmd"
 	"go-micro.dev/v4/metadata"
 	"go-micro.dev/v4/registry"
+	"go-micro.dev/v4/selector"
 
 	example "github.com/go-micro/examples/server/proto/example"
 )
@@ -26,12 +26,12 @@ type dcWrapper struct {
 
 func (dc *dcWrapper) Call(ctx context.Context, req client.Request, rsp interface{}, opts ...client.CallOption) error {
 	md, _ := metadata.FromContext(ctx)
-
 	filter := func(services []*registry.Service) []*registry.Service {
 		for _, service := range services {
 			var nodes []*registry.Node
 			for _, node := range service.Nodes {
-				if node.Metadata["datacenter"] == md["datacenter"] {
+				// fmt.Println(node.Metadata)
+				if node.Metadata["datacenter"] == md["Datacenter"] {
 					nodes = append(nodes, node)
 				}
 			}
@@ -44,7 +44,7 @@ func (dc *dcWrapper) Call(ctx context.Context, req client.Request, rsp interface
 		selector.WithFilter(filter),
 	))
 
-	fmt.Printf("[DC Wrapper] filtering for datacenter %s\n", md["datacenter"])
+	fmt.Printf("[DC Wrapper] filtering for datacenter %s\n", md["Datacenter"])
 	return dc.Client.Call(ctx, req, rsp, callOptions...)
 }
 
@@ -86,3 +86,6 @@ func main() {
 		call(i)
 	}
 }
+
+// go run server/wrapper/main.go
+// go run client/dc_filter/dc_filter.go

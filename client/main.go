@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"context"
 	example "github.com/go-micro/examples/server/proto/example"
@@ -13,7 +14,7 @@ import (
 // publishes a message
 func pub(p micro.Publisher) {
 	msg := &example.Message{
-		Say: "This is an async message",
+		Say: "This is an async message. " + time.Now().String(),
 	}
 
 	if err := p.Publish(context.TODO(), msg); err != nil {
@@ -69,10 +70,16 @@ func stream(i int, c client.Client) {
 			break
 		}
 		fmt.Println("Stream: rsp:", rsp.Count)
+		//why?
+		//Stream: rsp: 0
+		//Stream: rsp: 4
+		//Stream: rsp: 4
+		//Stream: rsp: 4
+		//Stream: rsp: 4
 	}
 
-	if stream.Error() != nil {
-		fmt.Println("stream err:", err)
+	if err = stream.Error(); err != nil {
+		fmt.Printf("stream err: %T, %[1]v\n", err)
 		return
 	}
 
@@ -123,7 +130,10 @@ func main() {
 	p := micro.NewPublisher("topic.example", service.Client())
 
 	fmt.Println("\n--- Publisher example ---")
-	pub(p)
+	for i := 0; i < 3; i++ {
+		pub(p)
+		time.Sleep(time.Second)
+	}
 
 	fmt.Println("\n--- Call example ---")
 	for i := 0; i < 10; i++ {
@@ -131,7 +141,7 @@ func main() {
 	}
 
 	fmt.Println("\n--- Streamer example ---")
-	stream(10, service.Client())
+	stream(5, service.Client())
 
 	fmt.Println("\n--- Ping Pong example ---")
 	pingPong(10, service.Client())
