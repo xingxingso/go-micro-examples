@@ -12,7 +12,9 @@ A http request is formatted as an [event](https://github.com/micro/go-api/blob/m
 
 Run the micro api with the event handler set and with a namespace which used as part of the topic name
 
-```
+```bash
+# micro not work
+# go install go-micro.dev/v4/cmd/micro@v4.6.0
 micro api --handler=event --namespace=go.micro.evt
 ```
 

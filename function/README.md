@@ -10,8 +10,12 @@ This is an example of creating a micro function. A function is a one time execut
 ## Run function
 
 ```shell
+#while true; do
+#	github.com/go-micro/examples/function
+#done
+
 while true; do
-	github.com/go-micro/examples/function
+  go run main.go
 done
 ```
 

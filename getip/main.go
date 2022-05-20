@@ -21,6 +21,8 @@ func (g *Greeter) Hello(ctx context.Context, req *proto.Request, rsp *proto.Resp
 	fmt.Println("remote ip is", md["Remote"])
 
 	rsp.Greeting = "Hello " + req.Name
+
+	fmt.Println(md)
 	return nil
 }
 
