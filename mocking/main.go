@@ -6,8 +6,8 @@ import (
 
 	proto "github.com/go-micro/examples/helloworld/proto"
 	"github.com/go-micro/examples/mocking/mock"
-	"go-micro.dev/v4"
 	"github.com/urfave/cli/v2"
+	"go-micro.dev/v4"
 )
 
 func main() {

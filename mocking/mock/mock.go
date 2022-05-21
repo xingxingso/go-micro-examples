@@ -12,7 +12,7 @@ type mockGreeterService struct {
 
 func (m *mockGreeterService) Hello(ctx context.Context, req *proto.Request, opts ...client.CallOption) (*proto.Response, error) {
 	return &proto.Response{
-		Greeting: "Hello " + req.Name,
+		Greeting: "Mocking: Hello " + req.Name,
 	}, nil
 }
 

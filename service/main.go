@@ -1,14 +1,13 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
-	"context"
-
 	proto "github.com/go-micro/examples/service/proto"
-	"go-micro.dev/v4"
 	"github.com/urfave/cli/v2"
+	"go-micro.dev/v4"
 )
 
 /*
