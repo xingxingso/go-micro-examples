@@ -1,17 +1,16 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"strings"
 
+	roundrobin "github.com/asim/go-micro/plugins/wrapper/select/roundrobin/v4"
 	hello "github.com/go-micro/examples/greeter/srv/proto/hello"
 	"go-micro.dev/v4"
-	"go-micro.dev/v4/errors"
-	roundrobin "github.com/asim/go-micro/plugins/wrapper/select/roundrobin/v4"
 	api "go-micro.dev/v4/api/proto"
-
-	"context"
+	"go-micro.dev/v4/errors"
 )
 
 type Say struct {

@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	pb "github.com/go-micro/examples/stream/grpc/proto"
 	"github.com/asim/go-micro/plugins/server/grpc/v4"
+	pb "github.com/go-micro/examples/stream/grpc/proto"
 	"go-micro.dev/v4"
 	"go-micro.dev/v4/logger"
 	"google.golang.org/protobuf/proto"
@@ -103,8 +103,8 @@ func (s *server) RouteChat(ctx context.Context, stream pb.RouteGuide_RouteChatSt
 		rn := make([]*pb.RouteNote, len(s.routeNotes[key]))
 		copy(rn, s.routeNotes[key])
 		s.mu.Unlock()
-
 		for _, note := range rn {
+			//fmt.Println(note)
 			if err := stream.Send(note); err != nil {
 				return err
 			}

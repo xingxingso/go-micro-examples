@@ -6,8 +6,8 @@ import (
 	"math/rand"
 	"time"
 
-	pb "github.com/go-micro/examples/stream/grpc/proto"
 	"github.com/asim/go-micro/plugins/client/grpc/v4"
+	pb "github.com/go-micro/examples/stream/grpc/proto"
 	"go-micro.dev/v4"
 	"go-micro.dev/v4/logger"
 )
@@ -43,7 +43,7 @@ func main() {
 
 // printFeature gets the feature for the given point.
 func printFeature(client pb.RouteGuideService, point *pb.Point) {
-	logger.Info("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
+	logger.Infof("Getting feature for point (%d, %d)", point.Latitude, point.Longitude)
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	feature, err := client.GetFeature(ctx, point)

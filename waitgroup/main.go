@@ -5,6 +5,7 @@ import (
 	"sync"
 
 	"context"
+
 	"go-micro.dev/v4"
 	"go-micro.dev/v4/server"
 )
@@ -15,6 +16,7 @@ func waitgroup(wg *sync.WaitGroup) server.HandlerWrapper {
 		return func(ctx context.Context, req server.Request, rsp interface{}) error {
 			wg.Add(1)
 			defer wg.Done()
+			fmt.Println("waiting...")
 			return h(ctx, req, rsp)
 		}
 	}
