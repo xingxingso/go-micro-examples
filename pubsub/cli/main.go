@@ -1,14 +1,14 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"time"
 
-	"context"
 	proto "github.com/go-micro/examples/pubsub/srv/proto"
+	"github.com/pborman/uuid"
 	"go-micro.dev/v4"
 	"go-micro.dev/v4/util/log"
-	"github.com/pborman/uuid"
 )
 
 // send events using the publisher
